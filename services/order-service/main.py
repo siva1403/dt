@@ -2,13 +2,16 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-orders = []
+products = [
+    {"id": 1, "name": "order", "price": 50000},
+    {"id": 2, "name": "order", "price": 20000}
+]
 
-@app.post("/orders")
-def create_order(order: dict):
-    orders.append(order)
-    return {"message": "Order placed", "order": order}
+@app.get("/products")
+def get_products():
+    return products
 
-@app.get("/orders")
-def get_orders():
-    return orders
+@app.post("/products")
+def add_product(product: dict):
+    products.append(product)
+    return product
