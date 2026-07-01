@@ -1,22 +1,17 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 
 app = FastAPI()
 
-class User(BaseModel):
-    name: str
-    age: int
+products = [
+    {"id": 1, "name": "siva", "price": 50000},
+    {"id": 2, "name": "krishna", "price": 20000}
+]
 
-users = []
+@app.get("/products")
+def get_products():
+    return products
 
-@app.post("/users")
-def create_user(user: User):
-    users.append(user.dict())
-    return {
-        "message": "User created",
-        "user": user
-    }
-
-@app.get("/users")
-def get_users():
-    return users
+@app.post("/products")
+def add_product(product: dict):
+    products.append(product)
+    return product
