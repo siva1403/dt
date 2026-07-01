@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-users = [siva , krishna]
+users = ["siva" , "krishna"]
 
 @app.post("/users")
 def create_user(user: dict):
